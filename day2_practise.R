@@ -43,18 +43,15 @@ table(dice.o)
 
 # 4. 1~12까지의 숫자 벡터로 3*4행렬 생성하고 변수에 저장하시오.
 # 알파벳 소문자 상수 벡터 letters를 이용하여 행과 열이름을 각각 지정하시오.
-rnames <- letters[c(1:3)]
-cnames <- letters[c(1:4)]
-values <- 1:12
-mtx <- matrix(values, 3, 4, byrow = FALSE, dimnames = list(rnames,cnames))
+mtx <- matrix(1:12, 3, 4, dimnames = list(letters[c(1:3)],letters[c(1:4)]))
 mtx
 
 # 5. 4번에서 생성한 행렬로부터 1번째와 3번째 열을 추출하여
 # 부분행렬을 생성하고, 2번째와 4번째 열을 추출하여 부분행렬을
 # 생성하고, 이들을 열의 방향으로 결합한 새로운 행렬을 생성하시오.
-c <- mtx[,c(1,3)]
-r <- mtx[,c(2,4)]
-newMtx <- cbind(c,r)
+c13 <- mtx[,c(1,3)]
+c24 <- mtx[,c(2,4)]
+newMtx <- cbind(c13,c24)
 newMtx
 
 
@@ -74,5 +71,5 @@ mtx %*% t(newMtx)
 # 7. 1~9999까지 정수로 9개의 열을 갖는 행렬을 생성하시오.
 # 마지막 세 개 행과 마지막 두 개 열로 구성된 3*2 부분행렬을 만드시오.
 
-m <- matrix(1:9999,,9)
+m <- matrix(1:9999,ncol=9)
 m[(nrow(m)-2):nrow(m),8:9]
