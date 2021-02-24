@@ -46,7 +46,14 @@ lst
 # 2) 새로운 리스트에서 pi 추출
 lst[[3]]
 
-
+# 다른 방법1
+lst <- list(a=1, b=2)
+lst['c'] <- pi
+lst
+# 다른 방법2
+lst <- list(a=1, b=2)
+lst$d <- pi
+lst
 
 # 5. 1. 행렬 X가 다음과 같이 정의되도록 R로 작성하라.
 #    c1 c2 c3
@@ -58,16 +65,21 @@ mtx <- matrix(1:9, 3, 3, dimnames = list(c("r1","r2","r3"), c("c1","c2","c3")))
 
 # ② cbind()와 rbind() 함수를 이용하라.
 # 1) cbind()
-cbind(c1=1:3,c2=4:6,c3=7:9)
+mtx2 <- cbind(c1=1:3,c2=4:6,c3=7:9)
+rownames(mtx2) <- c("r1","r2","r3")
+mtx2
 # 2) rbind()
-rbind(r1=c(1,4,7),r2=c(2,5,8),r3=c(3,6,9))
+mtx3 <- rbind(r1=c(1,4,7),r2=c(2,5,8),r3=c(3,6,9))
+colnames(mtx3) <- c("c1","c2","c3")
+mtx3
 
 # ③ dim() 함수를 이용하라.
 v <- 1:9
 dim(v) <- c(3,3)
 v
-
-
+rownames(v) <- c("r1","r2","r3")
+colnames(v) <- c("c1","c2","c3")
+v
 
 # 6. 앞 문제의 행렬 X에 대해 다음을 알아내는 방법을 R로 답하라.
 # ① 행과 열의 개수
@@ -201,3 +213,26 @@ data.euclid <- dist(data, method = "euclidean")
 data.euclid
 
 min(data.euclid)
+
+# 방법3
+BTS <- c(5,4,1.5)
+Son <- c(4,5,2)
+Red <- c(2.5,2,1)
+Twc <- c(3.5,4,5)
+sqrt(sum((Son - BTS)^2))
+
+# 만약, 평점 범위가 다음과 같다면?
+# 0~5 : 밀정과 경이로운 소문
+# 0~100 : 국제시장
+# 크게 다른 경우에는 표준화 또는 정규화 작업을 해줘서
+# rescaling 한다!
+
+
+# 각 영화별로 정규화 작업 수행
+# 정규화 : 0 <= (각각의 평점 - 최소값) / (최대값 - 최소값) <= 1
+
+
+
+
+
+
