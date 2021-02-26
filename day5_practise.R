@@ -30,8 +30,7 @@ paste(LETTERS[1:5], 1:5, sep = "")
  
 # 4. 단어 단위로 분할하고, 모든 쉼표와 하이픈은 제거하시오.
 txt3 <- c("Yesterday is history,", "That's, why we call it the present - from Kung")
-txt3 <- gsub(pattern = ",", replacement = "", x=txt3)
-txt3 <- gsub(pattern = " -", replacement = "", x=txt3)
+txt3 <- gsub(pattern = ",|-", replacement = "", x=txt3)
 txt3 <- strsplit(txt3, split = " ")
 txt3
 
@@ -39,12 +38,11 @@ txt3
 
 # 5. 주민번호 뒤 일곱 자리 수를 *로 모두 대체하시오
 socialnum <- c("110101-1234123", "950102-2121212")
-socialnum <- unlist(strsplit(socialnum, split = "-"))
-socialnum[c(2,4)] <- "*******"
-new.socialnum <- c(paste(socialnum[1:2], collapse = "-"), paste(socialnum[3:4], collapse = "-"))
+new.socialnum <- gsub(pattern = "-\\d+", replacement = '-*******', x=socialnum)
 new.socialnum
 
-
+substring(socialnum, 8) <- "*******"
+socialnum
 
 # 6. paste함수와 month.abb를 결합하여 "Jan_1-Feb_2- ... Dec_12"를 생성하시오
 paste(month.abb, "_", 1:12, sep = "", collapse = "-")
@@ -56,24 +54,13 @@ samsung <- read.csv("005930.KS.csv", header = TRUE, sep = ",")
 samsung
 
 # 1) Open, High, Low, Close, Adj.Close, Volume 열을 추출
-ss.open <- samsung$Open
-ss.open
-ss.high <- samsung$High
-ss.high
-ss.low <- samsung$Low
-ss.low
-ss.close <- samsung$Close
-ss.close
-ss.adj.close <- samsung$Adj.Close
-ss.adj.close
-ss.volume <- samsung$Volume
-ss.volume
+samsung[, -1]
 
 # 2) 각 열에 대해 최소값, 최대값, 평균, 표준편차 출력
-apply(samsung[,-1], 2, function(x){min(x, na.rm = T)})
-apply(samsung[,-1], 2, function(x){max(x, na.rm = T)})
-apply(samsung[,-1], 2, function(x){mean(x)})
-apply(samsung[,-1], 2, function(x){sd(x)})
+apply(samsung[,-1], 2, min)
+apply(samsung[,-1], 2, max)
+apply(samsung[,-1], 2, mean)
+apply(samsung[,-1], 2, sd)
 
 
 # 3) 각 열에 대해 정규화 / 표준화
