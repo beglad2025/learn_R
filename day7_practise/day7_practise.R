@@ -3,24 +3,26 @@
 # ...
 # The month of December
 
-for(i in 1:12)
-  print(paste("The month of", month.name[i]))
+paste("The month of", month.name)
 
 
 
 # 2. 짝수이면 TRUE, 홀수이면 FALSE를 출력하는 함수 작성.
 # 다음 벡터로 테스트하시오.
 
-n <- c(-5:5)
-ifelse(n%%2==0, TRUE, FALSE)
-
+myfunc <- function(x){
+  return(x%%2==0)
+}
+myfunc(-5:5)
 
 
 # 3. 짝수 개수를 세는 함수 작성.
 # 다음 벡터로 테스트하시오.
 
-n <- c(-5:5)
-sum(n%%2==0)
+myfunc2 <- function(x){
+  return(sum(x%%2==0))
+}
+myfunc2(-5:5)
 
 
 
@@ -28,11 +30,11 @@ sum(n%%2==0)
 # 아니면 FALSE를 출력하는 함수 작성.
 # 3과 1:5 벡터에 대해 테스트하시오
 
-# 1) 3에 대해 테스트
-if(3 > pi) TRUE else FALSE
-
-# 2) 1:5 벡터에 대해 테스트
-ifelse(1:5 > pi, TRUE, FALSE)
+myfunc3 <- function(x){
+  return(x>pi)
+}
+myfunc3(3)
+myfunc3(1:5)
 
 
 
@@ -47,11 +49,11 @@ df_midterm
 
 # - 각 과목별 평균을 구하시오.
 
-apply(df_midterm[,1:2], 2, mean)
+apply(df_midterm[,-3], 2, mean)
 
 # - 각 번호별 평균을 구하시오.
 
-apply(df_midterm[1:4,1:2], 1, mean)
+apply(df_midterm[1:4,-3], 1, mean)
 
 
 # 6. 2~99까지 수에 대해
@@ -72,16 +74,21 @@ sum(n2%%3==0)
 # 7. 임의의 수 n을 전달받아, n!을 출력하는 함수를 완성하시오.
 # (n>=2, 5!=5*4*3*2*1)
 
-fun.factorial <- function(x){
-  i <- 1
-  for(j in 1:x)
-    i <- i * j
-  print(i)
+fun.fac <- function(x){
+  if(x>=2){
+    prod(x:1)
+  }
 }
 
-fun.factorial(1) #1
-fun.factorial(2) #2
-fun.factorial(5) #120(=5*4*3*2*1)
+fun.fac(1) #1
+fun.fac(2) #2
+fun.fac(5) #120(=5*4*3*2*1)
+
+# factorial 구하는 함수도 있다
+
+factorial(4)
+
+
 
  
 # 8. 반복문을 이용하여 구구단을 출력하시오
@@ -118,6 +125,7 @@ repeat{if(i>9)break
 
 
 # while문으로 풀기
+
 i <- 1
 while(i<=9){
   blk <- (7-i)/2
@@ -126,6 +134,16 @@ while(i<=9){
   print(paste(y, x, sep = ""))
   i <- i+2
 }
+
+# for문으로 풀기
+
+for(i in seq(from=1, to=7, by=2)){
+  star <- paste(rep("*", times=i), collapse = "")
+  blank <- paste(rep(" ", times=(7-i)/2), collapse = "")
+  print(paste(blank, star))
+}
+
+
 
 #   10.  타이타닉 데이터 전처리
 # - train.csv 파일 읽을 때 "" 는 na로 처리하시오.
