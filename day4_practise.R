@@ -263,6 +263,7 @@ s.ex
 
 data(iris)
 iris
+iris[,1]
 scale(iris[,1])
 # 각 데이터마다 표준화한 결과 나오고 아래에 다음과 같이 나옴
 # attr(,"scaled:center")
